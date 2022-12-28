@@ -15,7 +15,7 @@ print(li)
 li.remove(int(input("Enter ele to del")))
 print(li)
 pos=li.index(int(input("Find ele")))
-print("Element found at" + str(pos))#Finding the postioin of given element 
+print("Element found at" + str(pos))
 print(li)
 print("MAX:"+str(max(li))+"\nMIN:"+str(min(li)))
 print(li)
