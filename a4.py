@@ -11,12 +11,11 @@ def ftok(a):
     return 273.5 + ftoc(a)
 def ktof(a):
     return 1.8*(ktoc(a)) + 32
-#infinite loop for menu driven approach
 while(1):
     print("Main Menu".center(40,"#"))
     ch=int(input("1.Conversion\n2.History\n3.EXIT\nEnter your choice(int only):"))
-    if ch==1:#conversion based on user choice
-        n=input("Enter temperature you would like to convert with unit(Eg:20C,50.00k...):")
+    if ch==1:
+        n=input("Enter temperature with unit(Eg:20C,50.00k...):")
         val=float(n[:-1])
         unit=n[-1].upper()
         to=input("Enter the unit to which u wanna convert(c/f/k)").upper()
@@ -35,7 +34,6 @@ while(1):
         else:
             print("Invalid input!!!")
             continue
-        #save the conversion in tuple and append to list
         print("Ans:"+str(ans)+str(to))
         x=[val,unit,"to",round(ans,3),to]
         history.append(tuple(x))
