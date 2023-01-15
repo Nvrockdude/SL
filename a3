@@ -1,0 +1,51 @@
+import seaborn as sns
+import matplotlib.pyplot as plt
+import pandas as pd
+
+titanic_df = pd.read_csv('titanictrain.csv')
+titanic_df.head()
+
+#Mapping the survived values 0->Died and 1->Survived
+titanic_df ['Survived'] = titanic_df ['Survived'].map({
+    0: 'Died',
+    1: 'Survived'
+})
+titanic_df.head(5)
+
+#deleting uneccessary
+titanic_df.drop(['Parch','PassengerId','Name','Ticket'], axis=1, inplace=True)
+titanic_df.head(5)
+
+titanic_df ['Pclass'] = titanic_df ['Pclass'].map({
+    1: 'Luxury Class',
+    2: 'Economy Class',
+    3: 'Lower Class'
+})
+titanic_df.head(5)
+
+#Replace NaN values in embarked with S
+titanic_df["Embarked"] = titanic_df["Embarked"].fillna("S")
+titanic_df.head(5)
+
+#Plotting graph of Survived/Dead Against Passenger Class
+ax = sns.countplot(x = 'Pclass', hue = 'Survived', palette = 'Set1',data = titanic_df)
+ax.set(title = 'Passenger status (Survived/Died) against Passenger Class',
+       xlabel = 'Passenger Class', ylabel = 'Total')
+plt.show()
+
+#Plotting graph of Survived/Dead Against Passenger Gender
+#crosstab=This method is used to compute a simple cross-tabulation of two (or more) factors.
+print(pd.crosstab(titanic_df['Sex'],titanic_df.Survived))
+ax=sns.countplot(x='Sex',hue='Survived',palette='Set2',data=titanic_df)
+ax.set(title='Gender based',xlabel='Sex',ylabel='Total')
+plt.show()
+
+#Mapping age categories using cut() from pandas and
+#Plotting graph of Survived/Dead Against Passenger Age Category
+interval = (0,18,35,60,120)
+categories = ['Children','Teen','Adult','Old']
+titanic_df["Age_categories"]=pd.cut(titanic_df.Age,interval,labels=categories)
+ax = sns.countplot(x="Age_categories",data=titanic_df,hue='Survived',palette='Set3')
+ax.set(xlabel='Age cats',ylabel='Total',title="age cats")
+print(pd.crosstab(titanic_df['Age_categories'],titanic_df.Survived))
+plt.show()
