@@ -1,0 +1,13 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
+import seaborn as sns
+
+studperf_df = pd.read_csv('StudentsPerformance.csv');
+print("INFO")
+studperf_df.info();print("\n\n\nINFO(VERBOSE=FALSE)")
+#showing info about the data frame
+studperf_df.info(verbose=False)#short Summary
+print("\n\n\nDESCRIBE()");
+print(studperf_df.describe())
+studperf_df.head(10)
