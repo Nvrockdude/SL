@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Question 7</title>
+</head>
+<body>
+    <script>
+        MyLength=[];
+        Original_String=["hello","wru","iam here"]
+        function update(arr1,arr2)
+        {   Filtered=[];
+            for(i=0;i<arr2.length;i++)
+                if(arr2[i]<=3)
+                    Filtered.push(arr1[i]);
+            document.getElementById('new').innerHTML=Filtered;
+        }
+        function caller()
+        {
+            Original_String.unshift(document.getElementById('text').value)
+            for( i=0;i<Original_String.length;i++)
+                MyLength[i]=Original_String[i].length;
+            document.getElementById('out').innerHTML="Original_String:"+Original_String+"<br>MyLength:"+MyLength;
+            update(Original_String,MyLength);
+        }
+    </script>
+    <h1>Question 7</h1>
+    Text:<input type="text" id="text">
+    <input type="button" onclick="caller()" value="submit"><br>
+    Result:<br><span id="out"></span><br>
+    Filtered:<span id="new"></span>
+</body>
+</html>
