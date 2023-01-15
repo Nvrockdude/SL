@@ -11,3 +11,51 @@ studperf_df.info(verbose=False)#short Summary
 print("\n\n\nDESCRIBE()");
 print(studperf_df.describe())
 studperf_df.head(10)
+
+
+#dropping lunch column
+studperf_df.drop(['lunch'],axis=1,inplace=True)
+studperf_df.head(3)
+
+studperf_df['parental level of education'] = studperf_df['parental level of education'].fillna("Not applicable")
+studperf_df.head()
+
+#mapping according to question
+studperf_df['race/ethnicity']=studperf_df['race/ethnicity'].map({
+    "group A":"Asian",
+    "group B": 'African',
+    "group C":"Afro-American",
+    "group D":"American",
+    "group E":"European"
+})
+studperf_df.head()
+
+#Tally of the Number of Male & Female students who took up the ‘test preparation course’ and those who did not.
+ax=sns.countplot(data=studperf_df,x="test preparation course",hue='gender',palette='Set1')
+ax.set(title='Course Completion based on gender',xlabel='Completed or not',ylabel='No of ppl')
+plt.show()
+
+#Total Number of Male & Female Students belonging to each student group 
+ax = sns.countplot(x="race/ethnicity",hue="gender",palette="Set2",data=studperf_df)
+ax.set(title="Total number of male and female students belonging to each group", xlabel="Groups", ylabel="Total")
+plt.show()
+
+#making intervals of marks  from mathscore according to question
+interval=(0,40,50,60,75)
+categories = ["Fail", "2nd class","1st class","Distinction"]
+studperf_df["Marks_cats"]=pd.cut(studperf_df.mathscore,interval,labels=categories)
+ax=sns.countplot(x="Marks_cats",hue="gender",palette="Set1",data=studperf_df)
+ax.set(title="Marks categorisation for mathscores",xlabel="Categories",ylabel="Number of students")
+plt.show()
+
+#Marks categorisation for reading
+studperf_df["Marks_Cats"]=pd.cut(studperf_df["reading score"],interval,labels=categories)
+ax=sns.countplot(x="Marks_Cats",hue="gender",palette="Set1",data=studperf_df)
+ax.set(title="Marks categorisation for reading",xlabel="Categories",ylabel="Number of students")
+plt.show()
+
+#Marks categorisation for writing
+studperf_df["Marks_Cats"]=pd.cut(studperf_df["writing score"],interval,labels=categories)
+ax=sns.countplot(x="Marks_Cats",hue="gender",palette="Set1",data=studperf_df)
+ax.set(title="Marks categorisation for writing",xlabel="Categories",ylabel="Number of students")
+plt.show()
